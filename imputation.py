@@ -79,20 +79,7 @@ class Imputation:
         self.data.dropna(inplace=True)
         print("Shape of dataset after deleting : ",self.data.shape)
 
-    def changeWithMean(self):
-
-            print("Here is the tasks you can perform: ")
-            print("1. Replace all the null values with mean")
-            print("2. Replace a particular column's null values with its mean")
-            print("Enter the choice :  ")
-            val = int(input())
-
-            if val==1:
-                self.data.fillna(self.data.mean(),inplace=True)
-                print("All null values are replaced with mean")    
-
-
-            elif val==2:    
+    def changeWithMean(self):    
                 while True:
                     print("Here is the list of all Columns : ")
                     for i in self.data.columns:
@@ -102,27 +89,23 @@ class Imputation:
                         print("Enter the name of the column  : ")
                         col = input()
                         if col in self.data.columns :
-                            self.data[col] = self.data[col].replace(np.nan,self.data[col].mean(),axis=1)
+                            if self.data.dtypes[col] == np.object:
+                                print(col+" has not a numeric data type")
+                                break
+                            self.data[col] = self.data[col].replace(np.nan,self.data[col].mean())
                             print("Null values of Column "+ col +" is replaced with mean.")
                             break
                         else:
                             print(col + " is not present in the data set.")
                             continue    
-        
+                    print("If you want to do more press 1 else 0 : ")
+                    val = int(input())
+                    if val==1:
+                        continue
+                    else:
+                        break        
+
     def changeWithMedian(self):
-    
-            print("Here is the tasks you can perform: ")
-            print("1. Replace all the null values with median")
-            print("2. Replace a particular column's null values with its median")
-            print("Enter the choice :  ")
-            val = int(input())
-
-            if val==1:
-                self.data.fillna(self.data.median(),inplace=True)
-                print("All null values are replaced with median")    
-
-
-            elif val==2:    
                 while True:
                     print("Here is the list of all Columns : ")
                     for i in self.data.columns:
@@ -132,42 +115,49 @@ class Imputation:
                         print("Enter the name of the column  : ")
                         col = input()
                         if col in self.data.columns :
+                            if self.data.dtypes[col] == np.object:
+                                print(col+" has not a numeric data type")
+                                break
                             self.data[col] = self.data[col].replace(np.nan,self.data[col].median())
                             print("Null values of Column "+ col +" is replaced with median.")
                             break
                         else:
                             print(col + " is not present in the data set.")
                             continue    
+                    print("If you want to do more press 1 else 0 : ")
+                    val = int(input())
+                    if val==1:
+                        continue
+                    else:
+                        break            
             
     def changeWithMode(self):
     
-            print("Here is the tasks you can perform: ")
-            print("1. Replace all the null values with mode")
-            print("2. Replace a particular column's null values with its mode")
-            print("Enter the choice :  ")
-            val = int(input())
-
-            if val==1:
-                self.data.fillna(self.data.mode())
-                print("All null values are replaced with mode")    
-
-
-            elif val==2:    
-                while True:
+            while True:
                     print("Here is the list of all Columns : ")
                     for i in self.data.columns:
                         print(i,end=' ')
                     print()
                     while True:
-                        print("Enter the name of the column : ")
+                        print("Enter the name of the column  : ")
                         col = input()
                         if col in self.data.columns :
-                            self.data[col] = self.data[col].replace(np.nan,self.data[col].mode())
+                            # if self.data.dtypes[col] == np.object:
+                            #     print(col+" has not a numeric data type")
+                            #     break
+                            self.data[col] = self.data[col].replace(np.nan,self.data[col].mode()[0])
                             print("Null values of Column "+ col +" is replaced with mode.")
                             break
                         else:
                             print(col + " is not present in the data set.")
-                            continue                               
+                            continue    
+                    print("If you want to do more press 1 else 0 : ")
+                    val = int(input())
+                    if val==1:
+                        continue
+                    else:
+                        break
+
 
     def showdata(self):
         length = int(input("Enter the no of rows"))
