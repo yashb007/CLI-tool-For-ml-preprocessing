@@ -31,7 +31,7 @@ class Description:
                 self.desc_column()
 
             elif value==-1:
-                sys.exit()   
+                break   
 
 
     def showdata(self):
@@ -62,4 +62,3 @@ class Description:
 
 
 
-#obj = Description(dataset)

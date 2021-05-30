@@ -1,6 +1,7 @@
 import sys
 import pandas as pd
 from data_description import Description
+from imputation import Imputation
 
 class Preprocessing:
     def __init__(self):
@@ -36,22 +37,30 @@ class Preprocessing:
                     continue   
 
     def tasks(self):
-        print("Tasks....")
-        print("1. Data Description")                
-        print("2. Handling Null Values")                
-        print("3. Encoding Categorical Data")                
-        print("4. Feature Scaling of the Dataset")                
-        print("5. Download the modified dataset")
-        print()                
-        print()
-        print("What do you want to do?(Press -1 to exit) : ")                
-        value = int(input())
-        print(value)
+        while True:
+            print("Tasks....")
+            print("1. Data Description")                
+            print("2. Handling Null Values")                
+            print("3. Encoding Categorical Data")                
+            print("4. Feature Scaling of the Dataset")                
+            print("5. Download the modified dataset")
+            print()                
+            print()
+            print("What do you want to do?(Press -1 to exit) : ")                
+            value = int(input())
+            print(value)
 
-        if value == 1:
-           print("yash") 
-           obj1 = Description(self.df)
-           obj1.tasks()
+            if value == 1:
+                print("yash") 
+                obj1 = Description(self.df)
+                obj1.tasks()
+
+            elif value==2:
+                obj2 = Imputation(self.df)
+                obj2.tasks()
+    
+            elif value == -1:
+                break    
 
 
 
