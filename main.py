@@ -2,7 +2,7 @@ import sys
 import pandas as pd
 from data_description import Description
 from imputation import Imputation
-
+from categorical import Categorial
 class Preprocessing:
     def __init__(self):
          if(len(sys.argv)!=2 or sys.argv[1].endswith('.csv')!=1):
@@ -58,7 +58,11 @@ class Preprocessing:
             elif value==2:
                 obj2 = Imputation(self.df)
                 obj2.tasks()
-    
+
+            elif value==3:
+                obj3 = Categorial(self.df)
+                obj3.tasks()
+
             elif value == -1:
                 break    
 
