@@ -3,6 +3,9 @@ import pandas as pd
 from data_description import Description
 from imputation import Imputation
 from categorical import Categorial
+from feature_scaling import Feature
+from download import Download
+
 class Preprocessing:
     def __init__(self):
          if(len(sys.argv)!=2 or sys.argv[1].endswith('.csv')!=1):
@@ -62,6 +65,14 @@ class Preprocessing:
             elif value==3:
                 obj3 = Categorial(self.df)
                 obj3.tasks()
+
+            elif value==4:
+                obj4 = Feature(self.df)
+                obj4.tasks()    
+
+            elif value==5:
+                obj5 = Download(self.df)
+                obj5.download()    
 
             elif value == -1:
                 break    
